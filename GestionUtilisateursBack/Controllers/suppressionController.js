@@ -1,9 +1,11 @@
 import * as suppressionModel from '../Models/suppressionModel.js';
-
+// Fonction pour la suppression d'un utilisateur
 export const deleteUser = async (req, res) => {
     const userId = req.params.id;
     try {
+        // Appel du modèle pour supprimer l'utilisateur
         const result = await suppressionModel.deleteUser(userId);
+        // Vérification si l'utilisateur a été supprimé avec succès
         if (result.affectedRows === 0) {
             return res.status(404).json({ message: 'Utilisateur non trouvé' });
         }

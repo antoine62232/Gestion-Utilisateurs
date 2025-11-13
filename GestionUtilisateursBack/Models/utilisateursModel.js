@@ -1,5 +1,5 @@
 import connexion from "../config/bdd.js";
-
+// Fonction pour récupérer tous les utilisateurs
 export const getAllUsers = async () => {
     const selectUsers = `
         SELECT users.id, users.nom, users.prenom, users.email, roles.nomRole AS role, users.created_at

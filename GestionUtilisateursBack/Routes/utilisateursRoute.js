@@ -6,9 +6,4 @@ const router = express.Router();
 
 router.get('/users', authenticateToken, utilisateursController.getAllUsers);
 
-// router.get('/users', (req, res, next) => {
-//     req.user = { roleId: 1 }; // Simuler un utilisateur admin pour les tests
-//     next();
-// }, utilisateursController.getAllUsers);
-
 export default router;
