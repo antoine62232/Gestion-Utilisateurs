@@ -2,6 +2,10 @@ import * as suppressionModel from '../Models/suppressionModel.js';
 // Fonction pour la suppression d'un utilisateur
 export const deleteUser = async (req, res) => {
     const userId = req.params.id;
+    // req.user est l'utilisateur connecté (grâce au JWT)
+    if (req.user.roleId !== 1 && req.user.id !== parseInt(userId)) {
+        return res.status(403).json({ message: "Accès refusé : Vous ne pouvez supprimer que votre propre compte." });
+    }
     try {
         // Appel du modèle pour supprimer l'utilisateur
         const result = await suppressionModel.deleteUser(userId);

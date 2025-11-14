@@ -4,6 +4,10 @@ export const updateUser = async (req, res) => {
     const userId = req.params.id;
     const { nom, prenom, email, roleId } = req.body;
     // Appel du modèle pour mettre à jour l'utilisateur
+    // req.user est l'utilisateur connecté (grâce au JWT)
+    if (req.user.roleId !== 1 && req.user.id !== parseInt(userId)) {
+        return res.status(403).json({ message: "Accès refusé : Vous ne pouvez modifier que votre propre compte." });
+    }
     try {
         const result = await modificationModel.updateUser(userId, nom, prenom, email, roleId);
         // Vérification si l'utilisateur a été mis à jour avec succès
